@@ -3,7 +3,6 @@
 namespace LumifyLabs\LaravelSpotify;
 
 use Illuminate\Support\ServiceProvider;
-use LumifyLabs\LaravelSpotify\Spotify;
 
 class SpotifyServiceProvider extends ServiceProvider
 {

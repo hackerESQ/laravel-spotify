@@ -20,16 +20,31 @@ class Spotify {
         });
     }
 
-    public function getSong() {
+    // search
+
+    public function search($q,$type,$options=[]) {
 
         $accessToken = $this->generateAccessToken();
 
         $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
 
-        // It's now possible to request data from the Spotify catalog
+        return $api->search($q,$type,$options);
 
-        return json_encode($api->getTrack('7EjyzZcbLxW7PaaLua9Ksb'));
+    }
+
+    // load playlist 
+
+    public function playlist($id,$options=[]) {
+
+        $accessToken = $this->generateAccessToken();
+
+        $api = new SpotifyWebAPI();
+        $api->setAccessToken($accessToken);
+
+        $playlist = $api->getPlaylist($id,$options);
+        
+        return $playlist;
 
     }
 }
