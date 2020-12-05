@@ -1,7 +1,6 @@
 {
     "name": "lumifylabs/laravel-spotify",
     "description": "Integrate your Laravel app with Spotify",
-    "type": "library",
     "require": {
         "jwilsson/spotify-web-api-php": "^4.0",
         "illuminate/support": "^7.0|^8.0"
@@ -16,6 +15,16 @@
     "autoload": {
         "psr-4": {
             "LumifyLabs\\LaravelSpotify\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LumifyLabs\\LaravelSpotify\\SpotifyServiceProvider"
+            ],
+            "aliases": {
+                "Spotify": "LumifyLabs\\LaravelSpotify\\Facades\\Spotify"
+            }
         }
     }
 }

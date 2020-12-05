@@ -2,11 +2,14 @@
 
 namespace LumifyLabs\LaravelSpotify;
 
+use SpotifyWebAPI\SpotifyWebAPI;
+use SpotifyWebAPI\Session;
+
 class Spotify {
 
     public function generateAccessToken() {
         return cache()->remember('spotify_access_token', 3600, function () {
-            $session = new \SpotifyWebAPI\Session(
+            $session = new Session(
                 config('spotify.client_id'),
                 config('spotify.client_secret')
             );
@@ -21,7 +24,7 @@ class Spotify {
 
         $accessToken = $this->generateAccessToken();
 
-        $api = new \SpotifyWebAPI\SpotifyWebAPI();
+        $api = new SpotifyWebAPI();
         $api->setAccessToken($accessToken);
 
         // It's now possible to request data from the Spotify catalog
