@@ -9,7 +9,7 @@ class SpotifyServiceProvider extends ServiceProvider
     public function register()
     {
         
-        $this->app->bind('spotify', function($app) {
+        $this->app->singleton('spotify', function($app) {
             return new Spotify();
         });
     }
