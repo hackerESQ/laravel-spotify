@@ -4,4 +4,4 @@ WIP - allows quickly interfacing with the Spotify API using Laravel. Authenticat
 
 Provides Facade and easy config file.
 
-PRs appreciated to extend functionality. 
+PRs appreciated to extend functionality or fix issues.
