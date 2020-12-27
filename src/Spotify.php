@@ -20,14 +20,21 @@ class Spotify {
         });
     }
 
+    public function setAccessToken() {
+        $accessToken = $this->generateAccessToken();
+
+        $api = new SpotifyWebAPI();
+
+        $api->setAccessToken($accessToken);
+
+        return $api;
+    }
+
     // search
 
     public function search($q,$type,$options=[]) {
 
-        $accessToken = $this->generateAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+        $api = $this->setAccessToken();
 
         return $api->search($q,$type,$options);
 
@@ -37,10 +44,7 @@ class Spotify {
 
     public function playlist($id,$options=[]) {
 
-        $accessToken = $this->generateAccessToken();
-
-        $api = new SpotifyWebAPI();
-        $api->setAccessToken($accessToken);
+        $api = $this->setAccessToken();
 
         $playlist = $api->getPlaylist($id,$options);
         
