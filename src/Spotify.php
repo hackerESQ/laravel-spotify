@@ -7,11 +7,26 @@ use SpotifyWebAPI\Session;
 
 class Spotify {
 
+    protected string $client_id = '';
+    protected string $client_secret = '';
+
+    function __construct() {
+        $this->client_id = config('spotify.client_id') ?? '';
+        $this->client_secret = config('spotify.client_secret') ?? '';
+    }
+
+    public function setCredentials($credentials) {
+        $this->client_id = $credentials['client_id'];
+        $this->client_secret = $credentials['client_secret'];
+
+        return $this;
+    }
+
     public function generateAccessToken() {
         return cache()->remember('spotify_access_token', 3600, function () {
             $session = new Session(
-                config('spotify.client_id'),
-                config('spotify.client_secret')
+                $this->client_id,
+                $this->client_secret
             );
 
             $session->requestCredentialsToken();
