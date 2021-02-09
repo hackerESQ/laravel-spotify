@@ -10,7 +10,7 @@ class Spotify {
     protected string $client_id = '';
     protected string $client_secret = '';
 
-    function __construct() {
+    public function __construct() {
         $this->client_id = config('spotify.client_id') ?? '';
         $this->client_secret = config('spotify.client_secret') ?? '';
     }
@@ -35,7 +35,7 @@ class Spotify {
         });
     }
 
-    public function setAccessToken() {
+    public function getSpotifyApi() {
         $accessToken = $this->generateAccessToken();
 
         $api = new SpotifyWebAPI();
@@ -49,7 +49,7 @@ class Spotify {
 
     public function search($q,$type,$options=[]) {
 
-        $api = $this->setAccessToken();
+        $api = $this->getSpotifyApi();
 
         return $api->search($q,$type,$options);
 
@@ -59,7 +59,7 @@ class Spotify {
 
     public function playlist($id,$options=[]) {
 
-        $api = $this->setAccessToken();
+        $api = $this->getSpotifyApi();
 
         $playlist = $api->getPlaylist($id,$options);
         
