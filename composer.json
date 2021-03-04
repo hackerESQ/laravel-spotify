@@ -1,5 +1,5 @@
 {
-    "name": "lumifylabs/laravel-spotify",
+    "name": "hackeresq/laravel-spotify",
     "description": "Integrate your Laravel app with Spotify",
     "require": {
         "jwilsson/spotify-web-api-php": "^4.0",
