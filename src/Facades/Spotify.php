@@ -1,6 +1,6 @@
 <?php 
 
-namespace LumifyLabs\LaravelSpotify\Facades;
+namespace HackerESQ\LaravelSpotify\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
