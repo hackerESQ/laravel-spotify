@@ -14,16 +14,16 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "LumifyLabs\\LaravelSpotify\\": "src/"
+            "HackerESQ\\LaravelSpotify\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "LumifyLabs\\LaravelSpotify\\SpotifyServiceProvider"
+                "HackerESQ\\LaravelSpotify\\SpotifyServiceProvider"
             ],
             "aliases": {
-                "Spotify": "LumifyLabs\\LaravelSpotify\\Facades\\Spotify"
+                "Spotify": "HackerESQ\\LaravelSpotify\\Facades\\Spotify"
             }
         }
     }
