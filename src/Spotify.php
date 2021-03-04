@@ -1,6 +1,6 @@
 <?php
 
-namespace LumifyLabs\LaravelSpotify;
+namespace HackerESQ\LaravelSpotify;
 
 use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\Session;
