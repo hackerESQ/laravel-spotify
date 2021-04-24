@@ -2,40 +2,52 @@
 
 namespace HackerESQ\LaravelSpotify;
 
-use SpotifyWebAPI\SpotifyWebAPI;
 use SpotifyWebAPI\Session;
+use Illuminate\Support\Arr;
+use SpotifyWebAPI\SpotifyWebAPI;
+use Illuminate\Support\Facades\Cache;
 
-class Spotify {
+class Spotify
+{
 
     protected string $client_id = '';
     protected string $client_secret = '';
 
-    public function __construct() {
-        $this->client_id = config('spotify.client_id') ?? '';
-        $this->client_secret = config('spotify.client_secret') ?? '';
+    public function __construct($config)
+    {
+        $this->client_id = Arr::get($config, 'spotify.client_id', null);
+        $this->client_secret = Arr::get($config, 'spotify.client_secret', null);
     }
 
-    public function setCredentials($credentials) {
+    public function setCredentials($credentials)
+    {
         $this->client_id = $credentials['client_id'];
         $this->client_secret = $credentials['client_secret'];
 
         return $this;
     }
 
-    public function generateAccessToken() {
-        return cache()->remember('spotify_access_token', 3600, function () {
+    public function forgetAccessToken()
+    {
+        Cache::forget('spotify_access_token');
+    }
+
+    public function generateAccessToken()
+    {
+        return Cache::remember('spotify_access_token', 3600, function () {
             $session = new Session(
                 $this->client_id,
                 $this->client_secret
             );
 
             $session->requestCredentialsToken();
-            
+
             return $session->getAccessToken();
         });
     }
 
-    public function getSpotifyApi() {
+    public function getSpotifyApi()
+    {
         $accessToken = $this->generateAccessToken();
 
         $api = new SpotifyWebAPI();
@@ -47,23 +59,23 @@ class Spotify {
 
     // search
 
-    public function search($q,$type,$options=[]) {
+    public function search($q, $type, $options = [])
+    {
 
         $api = $this->getSpotifyApi();
 
-        return $api->search($q,$type,$options);
-
+        return $api->search($q, $type, $options);
     }
 
     // load playlist 
 
-    public function playlist($id,$options=[]) {
+    public function playlist($id, $options = [])
+    {
 
         $api = $this->getSpotifyApi();
 
-        $playlist = $api->getPlaylist($id,$options);
-        
-        return $playlist;
+        $playlist = $api->getPlaylist($id, $options);
 
+        return $playlist;
     }
 }
