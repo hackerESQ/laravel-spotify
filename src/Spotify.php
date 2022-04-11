@@ -78,4 +78,13 @@ class Spotify
 
         return $playlist;
     }
+
+    // get track features
+
+    public function audioFeatures($trackIds)
+    {
+        $api = $this->getSpotifyApi();
+
+        return $api->getAudioFeatures($trackIds);
+    }
 }
